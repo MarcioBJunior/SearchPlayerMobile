@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
   Widget _buildDescription() {
-    return Text('O SearchPlayer é uma plataforma web onde os fãs de futebol, jornalistas e curiosos podem consultar e extrair rapidamente informações de jogadores do esporte, em todo o mundo. Além de disponibilizar informações dos players, a plataforma disponibiliza vídeos do youtube referente ao atleta consultado diretamente na plataforma.',
+    return Text('O SearchPlayer é uma plataforma onde os fãs de futebol, jornalistas e curiosos podem consultar e extrair rapidamente informações de jogadores do esporte, em todo o mundo. Além de disponibilizar informações dos players, a plataforma disponibiliza vídeos do youtube referente ao atleta consultado diretamente na plataforma.',
       style: TextStyle(color: Colors.white, fontSize: 16, ),
       textAlign: TextAlign.justify,
 
