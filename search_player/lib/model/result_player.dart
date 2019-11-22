@@ -2,7 +2,9 @@
 
 import 'dart:convert';
 
-class ResultPlayer {
+class  ResultPlayer {
+
+
 // Informações Pessoais
 String nome;
 String dataNascimeto;
@@ -24,6 +26,7 @@ String instagram;
 String facebook;
 
 ResultPlayer({
+
   this.nome,
   this.dataNascimeto,
   this.peso,
@@ -40,9 +43,13 @@ ResultPlayer({
   this.facebook,
 });
 
+
+
+
 factory ResultPlayer.fromJson(String str) => ResultPlayer.fromMap(json.decode(str));
 
 String toJson() => json.encode(toMap());
+
 
 factory ResultPlayer.fromMap(Map < String, dynamic > json) => ResultPlayer(
 
@@ -82,3 +89,4 @@ Map<String, dynamic > toMap() => {
 
 
 }
+

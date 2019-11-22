@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   bool _loading = false;
   bool _enableField = true;
   String _result,_result1,_result2,_result3,_result4,_result5,_result6,_result7,_result8,_result9,_result10,_result11,_result12,_result13,_result14;
-
+  String _validate;
   @override
   void dispose() {
     super.dispose();
@@ -124,28 +124,99 @@ class _HomePageState extends State<HomePage> {
 
     final resultPlayer = await SearchPlayerService.fetchPlayer(player: player);
     print(resultPlayer.nome); // Exibindo somente a nome no terminal
-    print(resultPlayer.dataNascimeto);
 
     setState(() {
+      // TODOS ATRIBUTOS EM STRING
+      _validate = resultPlayer.toJson();
+      
+        //NOME
+        if(resultPlayer.nome == null || resultPlayer.nome == ""){
+          _result = "Nome: "+" Informação Indisponível!";
+        }else{
+          _result = "Nome: "+ resultPlayer.nome;
+        }
+        //DATA DE NASCIMENTO
+        if(resultPlayer.dataNascimeto == null || resultPlayer.dataNascimeto == ""){
+          _result1 = "Data de Nascimento: "+" Informação Indisponível!";
+        }else{
+          _result1 = "Data de Nascimento: "+resultPlayer.dataNascimeto;
+        }
+        //PESO
+        if(resultPlayer.peso == null || resultPlayer.peso == "" ){
+          _result2 = "Peso: "+" Informação Indisponível!";
+        }else{
+          _result2 = "Peso: "+resultPlayer.peso;
+        }
+        //ALTURA
+        if(resultPlayer.altura == null || resultPlayer.altura == ""){
+          _result3 = "Altura: "+" Informação Indisponível!";
+        }else{
+          _result3 = "Altura: "+resultPlayer.altura;
+        }
+        //NACIONALIDADE
+        if(resultPlayer.nacionalidade == null || resultPlayer.nacionalidade == ""){
+          _result4 = "Nacionalidade: "+" Informação Indisponível!";
+        }else{
+          _result4 = "Nacionalidade: "+resultPlayer.nacionalidade;
+        }
+        //LOCAL DE NASCIMENTO
+        if(resultPlayer.localNascimento == null || resultPlayer.localNascimento == ""){
+          _result5 = "Local de Nascimento: "+" Informação Indisponível!";
+        }else{
+          _result5 = "Local de Nascimento: "+resultPlayer.localNascimento;
+        }
+        //TIME
+        if(resultPlayer.time == null || resultPlayer.time == ""){
+          _result6 = "Time: "+" Informação Indisponível!";
+        }else{
+          _result6 = "Time: "+resultPlayer.time;
+        }
+        //NÚMERO
+        if(resultPlayer.numero == null || resultPlayer.numero == ""){
+          _result7 = "Número: "+" Informação Indisponível!";
+        }else{
+          _result7 = "Número: "+resultPlayer.numero;
+        }
+        //SALÁRIO
+        if(resultPlayer.salario == null || resultPlayer.salario == ""){
+          _result8 = "Salário: "+" Informação Indisponível!";
+        }else{
+          _result8 = "Salário: "+resultPlayer.salario;
+        }
+        //CHUTEIRA
+        if(resultPlayer.chuteira == null || resultPlayer.chuteira == ""){
+          _result9 = "Chuteira: "+" Informação Indisponível!";
+        }else{
+          _result9 = "Chuteira: "+resultPlayer.chuteira;
+        }
+        //POSIÇÃO
+        if(resultPlayer.posicao == null || resultPlayer.posicao == ""){
+          _result10 = "Posição: "+" Informação Indisponível!";
+        }else{
+          _result10 = "Posição: "+resultPlayer.posicao;
+        }
+        //TWITTER
+        if(resultPlayer.twitter == null || resultPlayer.twitter == ""){
+          _result11 = "Twitter: "+" Informação Indiponível!";
+        }else{
+          _result11 = "Twitter: "+resultPlayer.twitter;
+        }
+        //INSTAGRAM
+        if(resultPlayer.instagram == null || resultPlayer.instagram == ""){
+          _result12 = "Instagram: "+" Informação Indisponível!";
+        }else{
+          _result12 = "Instagram: "+resultPlayer.instagram;
+        }
+        //FACEBOOK
+        if(resultPlayer.facebook == null || resultPlayer.facebook == ""){
+          _result13 = "Facebook: "+" Informação Indisponível!";
+        }else{
+          _result13 = "Facebook: "+resultPlayer.facebook;
+        }
 
-      _result = "Nome: "+ resultPlayer.nome;
-
-      _result1 = "Data de Nascimento: "+resultPlayer.dataNascimeto;
-      _result2 = "Peso "+resultPlayer.peso;
-      _result3 = "Altura: "+resultPlayer.altura;
-      _result4 = "Nacionalidade: "+resultPlayer.nacionalidade;
-      _result5 = "Local de Nascimento: "+resultPlayer.localNascimento;
-      _result6 = "Time: "+resultPlayer.time;
-      _result7 = "Número: "+resultPlayer.numero;
-      _result8 = "Salário: "+resultPlayer.salario;
-      _result9 = "Chuteira: "+resultPlayer.chuteira;
-      _result10 = "Posição: "+resultPlayer.posicao;
-      _result11 = "Twitter: "+resultPlayer.twitter;
-      _result12 = "Instagram: "+resultPlayer.instagram;
-      _result13 = "Facebook: "+resultPlayer.facebook;
     });
 
-    _searching(false);
+      _searching(false);
   }
 
   Widget _buildResult() {
@@ -244,7 +315,9 @@ class _HomePageState extends State<HomePage> {
           , style: TextStyle(color: Colors.white, fontSize: 18)),
     );
   }
+
   Widget _buildResult12() {
+
     return Container(
       padding: EdgeInsets.only(top: 20.0),
       child: Text(
