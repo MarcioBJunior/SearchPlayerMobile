@@ -9,7 +9,6 @@ void main() {
     theme: ThemeData(brightness: Brightness.light, primaryColor: Colors.black),
     darkTheme: ThemeData(
       brightness: Brightness.dark,
-      fontFamily: 'Josefin Sans',
     ),
   ));
 }

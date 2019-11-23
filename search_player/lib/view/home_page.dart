@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:search_player/services/search_player_service.dart';
-
+import 'package:search_player/view/result_page.dart';
 
 class HomePage extends StatefulWidget{
 
@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   bool _loading = false;
   bool _enableField = true;
   String _result,_result1,_result2,_result3,_result4,_result5,_result6,_result7,_result8,_result9,_result10,_result11,_result12,_result13,_result14;
-  String _validate;
+
   @override
   void dispose() {
     super.dispose();
@@ -33,44 +33,38 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            _buildDescription(),
             Padding(
-                padding: const EdgeInsets.only(top: 35)
+                padding: const EdgeInsets.only(top: 100)
             ),
             _buildTitleInput(),
+
             _buildSearchPlayerTextField(),
             _buildSearchPlayerButton(),
-            _buildResult(),
-            _buildResult1(),
-            _buildResult2(),
-            _buildResult3(),
-            _buildResult4(),
-            _buildResult5(),
-            _buildResult6(),
-            _buildResult7(),
-            _buildResult8(),
-            _buildResult9(),
-            _buildResult10(),
-            _buildResult11(),
-            _buildResult12(),
-            _buildResult13(),
+            Padding(
+                padding: const EdgeInsets.only(top: 100)
+            ),
+            _buildDescription(),
 
           ],
         ),
       ),
-      backgroundColor: Colors.green,
+      backgroundColor: Color(0xff003300),
     );
   }
   Widget _buildDescription() {
-    return Text('O SearchPlayer é uma plataforma onde os fãs de futebol, jornalistas e curiosos podem consultar e extrair rapidamente informações de jogadores do esporte, em todo o mundo. Além de disponibilizar informações dos players, a plataforma disponibiliza vídeos do youtube referente ao atleta consultado diretamente na plataforma.',
-      style: TextStyle(color: Colors.white, fontSize: 16, ),
+    return Text('       O SearchPlayer é uma plataforma onde os fãs de futebol,'
+        ' jornalistas e curiosos podem consultar e extrair rapidamente informações '
+        'de jogadores do esporte, em todo o mundo. Além de disponibilizar informações'
+        ' dos players, a plataforma disponibiliza vídeos do youtube referente ao atleta'
+        ' consultado diretamente na plataforma.',
+      style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Abel'),
       textAlign: TextAlign.justify,
 
     );
   }
-  Widget _buildTitleInput() {
+    Widget _buildTitleInput() {
  return Text('INFORME O NOME DO JOGADOR:',
-   style: TextStyle(color: Colors.white, fontSize: 17),
+   style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Abel'),
    textAlign: TextAlign.center,
  );
   }
@@ -118,6 +112,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future _searchPlayer() async {
+
     _searching(true);
 
     final player = _searchPlayerController.text;
@@ -126,12 +121,12 @@ class _HomePageState extends State<HomePage> {
     print(resultPlayer.nome); // Exibindo somente a nome no terminal
 
     setState(() {
-      // TODOS ATRIBUTOS EM STRING
-      _validate = resultPlayer.toJson();
-      
+
         //NOME
         if(resultPlayer.nome == null || resultPlayer.nome == ""){
           _result = "Nome: "+" Informação Indisponível!";
+        }else if (resultPlayer.nome == "     JOGADOR NÃO EXISTE!"){
+          _result = resultPlayer.nome;
         }else{
           _result = "Nome: "+ resultPlayer.nome;
         }
@@ -213,125 +208,28 @@ class _HomePageState extends State<HomePage> {
         }else{
           _result13 = "Facebook: "+resultPlayer.facebook;
         }
-
     });
 
       _searching(false);
-  }
 
-  Widget _buildResult() {
-      return Container(
-        padding: EdgeInsets.only(top: 20.0),
-        child: Text(
-            _result ?? ''
-            , style: TextStyle(color: Colors.white, fontSize: 18)),
-      );
-    }
-  Widget _buildResult1() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result1 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
+      Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ResultPage()),
     );
-  }
-  Widget _buildResult2() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result2 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
-    );
-  }
-  Widget _buildResult3() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result3 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
-    );
-  }
-  Widget _buildResult4() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result4 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
-    );
-  }
-  Widget _buildResult5() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result5 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
-    );
-  }
-  Widget _buildResult6() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result6 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
-    );
-  }
-  Widget _buildResult7() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result7 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
-    );
-  }
-  Widget _buildResult8() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result8 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
-    );
-  }
-  Widget _buildResult9() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result9 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
-    );
-  }
-  Widget _buildResult10() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result10 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
-    );
-  }
-  Widget _buildResult11() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result11 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
-    );
-  }
-
-  Widget _buildResult12() {
-
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result12 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
-    );
-  }
-  Widget _buildResult13() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(
-          _result13 ?? ''
-          , style: TextStyle(color: Colors.white, fontSize: 18)),
-    );
+      ResultPage.nome = _result;
+      ResultPage.dataNasc = _result1;
+      ResultPage.peso = _result2;
+      ResultPage.altura = _result3;
+      ResultPage.nascionalidade = _result4;
+      ResultPage.localNasc = _result5;
+      ResultPage.time = _result6;
+      ResultPage.numero = _result7;
+      ResultPage.salario = _result8;
+      ResultPage.chuteira = _result9;
+      ResultPage.posicao = _result10;
+      ResultPage.twitter = _result11;
+      ResultPage.insta = _result12;
+      ResultPage.face = _result13;
   }
   }
 
