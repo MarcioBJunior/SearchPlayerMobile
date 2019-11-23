@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:search_player/services/search_player_service.dart';
+import 'package:search_player/view/como_funciona.dart';
 import 'package:search_player/view/result_page.dart';
 
+import 'contatos.dart';
+
 class HomePage extends StatefulWidget{
-
-    @override
+   @override
     _HomePageState createState() => _HomePageState();
-
 }
 
 class _HomePageState extends State<HomePage> {
@@ -25,30 +26,102 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
-        title: Text('SearchPlayer'),
+        titleSpacing: 70,
+        title: Text('SearchPlayer', style: TextStyle( fontFamily: 'Abel', fontSize: 30),),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.only(top: 100)
-            ),
-            _buildTitleInput(),
+      drawer: Drawer(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.black,
+          ),
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text('SearchPlayer', style: TextStyle(color: Colors.white, fontFamily: 'Abel', fontSize: 25), textAlign: TextAlign.center,),
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                ),
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(bottom: 100)
+              ),
+              ListTile(
+                title: Text('Como Funciona?',style: TextStyle(color: Colors.white, fontFamily: 'Abel',fontSize: 20), textAlign: TextAlign.center,),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ComoFuncionaPage()),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text('Contatos',style: TextStyle(color: Colors.white, fontFamily: 'Abel',fontSize: 20), textAlign: TextAlign.center,),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
 
-            _buildSearchPlayerTextField(),
-            _buildSearchPlayerButton(),
-            Padding(
-                padding: const EdgeInsets.only(top: 100)
-            ),
-            _buildDescription(),
-
-          ],
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ContatosPage()),
+                  );
+                },
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(bottom: 220)
+              ),
+              ListTile(
+                title: Text('Desenvolvido por:',
+                  style: TextStyle(color: Colors.white, fontFamily: 'Abel',fontSize: 18)
+                  , textAlign: TextAlign.center,),
+              ),
+              ListTile(
+                title: Text('Márcio Brandão Júnior',
+                  style: TextStyle(color: Colors.white, fontFamily: 'Abel',fontSize: 16)
+                  , textAlign: TextAlign.center,),
+              ),
+            ],
+          ),
         ),
       ),
-      backgroundColor: Color(0xff003300),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                  fit: BoxFit.cover,
+                  image: new AssetImage('lib/img/background1.jpg')), ),
+          ),
+          Center(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+
+                  _buildTitleInput(),
+                  Padding(
+                      padding: const EdgeInsets.only(top: 50)
+                  ),
+                  _buildSearchPlayerTextField(),
+                  _buildSearchPlayerButton(),
+                  Padding(
+                      padding: const EdgeInsets.only(top: 100)
+                  ),
+                  _buildDescription(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ) ,
     );
   }
   Widget _buildDescription() {
@@ -71,14 +144,27 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildSearchPlayerTextField() {
 
-    return TextField(
-      autofocus: true,
+    FocusNode myFocusNode = new FocusNode();
+
+    return new TextField(
+      focusNode: myFocusNode,
+      cursorColor:Colors.white,
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.done,
       style: TextStyle(color: Colors.white),
       controller: _searchPlayerController,
       enabled: _enableField,
 
+      decoration: new InputDecoration(
+        hintStyle: TextStyle(color: Colors.white),
+        hintText: "Ex: Neymar",
+
+          enabledBorder: OutlineInputBorder(
+              borderSide:  BorderSide(
+                  color: Colors.white, width: 0.3),
+          ),
+          border:  OutlineInputBorder(),
+      ),
     );
   }
 
@@ -87,7 +173,7 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.only(top: 20.0),
       child: RaisedButton(
         textColor: Colors.white,
-        color: Colors.black,
+        color: Color(0xff008000),
         onPressed: _searchPlayer,
         child: _loading ? _circularLoading() : Text('Buscar'),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -107,7 +193,9 @@ class _HomePageState extends State<HomePage> {
     return Container(
       height: 15.0,
       width: 15.0,
-      child: CircularProgressIndicator(),
+      child: CircularProgressIndicator(
+      ),
+
     );
   }
 

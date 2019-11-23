@@ -9,6 +9,7 @@ class ResultPage extends StatelessWidget {
     return Scaffold(
           appBar: AppBar(
             title: Text(nome.substring(5)),
+            titleSpacing: 80,
           ),
           body: Stack(
 children: <Widget>[

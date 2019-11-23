@@ -21,8 +21,11 @@ class _MyHomePageState extends State<SplashPage> {
 
 Widget _introScreen() {
   return Stack(
+
     children: <Widget>[
+
       SplashScreen(
+
         seconds: 5,
         gradientBackground: LinearGradient(
           begin: Alignment.topRight,
@@ -31,8 +34,9 @@ Widget _introScreen() {
         ),
         navigateAfterSeconds: HomePage() ,
         loaderColor: Colors.green,
+        styleTextUnderTheLoader: TextStyle(color: Colors.white),
         loadingText:  Text("Chamando os Atletas",
-          style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Raleway' ),
+          style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: 'Raleway' ),
           textAlign: TextAlign.center,
         ),
       ),
